@@ -20,7 +20,7 @@ spec:
         values: ["spot", "on-demand"]
       - key: node.kubernetes.io/instance-type
         operator: In
-        values: ["g6.2xlarge", "g5.2xlarge"]
+        values: ["g6.4xlarge", "gr6.4xlarge"]
       - key: kubernetes.io/os
         operator: In
         values: ["linux"]
@@ -41,7 +41,7 @@ spec:
     ebs:
       volumeSize: 100Gi
       volumeType: gp3
-  role: Comfyui-Cluster-ComfyuiClusterkarpenternoderole-123456
+  role: Comfyui-Cluster-ComfyuiClusterkarpenternoderoleE627-GvPN70ZaB8fK
   securityGroupSelectorTerms:
   - tags:
       Name: eks-cluster-sg-Comfyui-Cluster*

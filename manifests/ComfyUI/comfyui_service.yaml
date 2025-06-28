@@ -21,10 +21,17 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=300
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:598982683772:certificate/bf06ddb4-2c9c-44a6-86ca-d63bb7dc7b34
 spec:
   ingressClassName: alb
+  tls:
+    - hosts:
+        - comfyui.weareluca.ai
+      secretName: dummy-secret-placeholder  # Required by k8s spec but ignored by AWS ALB controller
   rules:
-    - http:
+    - host: comfyui.weareluca.ai
+      http:
         paths:
         - path: /
           pathType: Prefix

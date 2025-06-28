@@ -10,7 +10,7 @@ import time
 import threading
 import comfyui_api_utils
 
-SERVER_ADDRESS = "https://abcdefg123456.cloudfront.net"
+SERVER_ADDRESS = "http://k8s-default-comfyuii-74cd8f9a9e-1135782148.us-west-2.elb.amazonaws.com"
 SHOW_IMAGES = False
 
 # Check if the image is ready, if not, upload it
