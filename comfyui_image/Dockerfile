@@ -15,6 +15,9 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     git checkout v0.3.39
 RUN pip3 install -r /app/ComfyUI/requirements.txt
 
+# To fix the failing installation of BrushNet nodes
+RUN pip install -U accelerate==0.32.0
+
 # Install ComfyUI-Manager
 RUN cd /app/ComfyUI/custom_nodes && \
     git clone https://github.com/ltdrdata/ComfyUI-Manager.git comfyui-manager && \
