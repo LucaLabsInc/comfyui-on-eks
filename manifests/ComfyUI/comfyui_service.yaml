@@ -11,7 +11,7 @@ spec:
   - port: 8848
     protocol: TCP
     targetPort: 8848
-  type: NodePort
+  type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -37,6 +37,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: comfyui-service
+              name: keda-add-ons-http-interceptor-proxy
               port:
-                number: 8848
+                number: 8080
