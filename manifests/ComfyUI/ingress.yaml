@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: comfyui-ingress
+  namespace: keda
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-group-attributes: stickiness.enabled=true,stickiness.lb_cookie.duration_seconds=300
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-2:598982683772:certificate/bf06ddb4-2c9c-44a6-86ca-d63bb7dc7b34
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=300
+spec:
+  ingressClassName: alb
+  tls:
+    - hosts:
+        - comfyui.weareluca.ai
+      secretName: dummy-secret-placeholder  # Required by k8s spec but ignored by AWS ALB controller
+  rules:
+    - host: comfyui.weareluca.ai
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: keda-add-ons-http-interceptor-proxy
+              port:
+                number: 8080

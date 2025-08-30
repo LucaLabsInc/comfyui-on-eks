@@ -1,16 +1,23 @@
-apiVersion: keda.sh/v1alpha1
+apiVersion: http.keda.sh/v1alpha1
 kind: HTTPScaledObject
 metadata:
-  name: comfyui-http
+  name: comfyui-http-scaledobject
   namespace: default
 spec:
-  host: comfyui.weareluca.ai # external host
+  hosts:
+    - comfyui.weareluca.ai # external host
   targetPendingRequests: 100  # threshold before scaling out more
   scaleTargetRef:
     name: comfyui
     kind: Deployment
+    service: comfyui-service
     port: 8848
-  minReplicaCount: 0
-  maxReplicaCount: 2
-  pollingInterval: 10 # 10 seconds
-  cooldownPeriod:  900 # 15 mins
+  replicas:
+    min: 0
+    max: 2
+  scaledownPeriod: 900 # 15 mins
+  scalingMetric:
+    requestRate:
+      granularity: 1s
+      targetValue: 100
+      window: 1m

@@ -82,15 +82,36 @@ RUN cd /app/ComfyUI/custom_nodes && \
     pip3 install -r requirements.txt
 
 # Install ComfyUI-ReActor
-# RUN cd /app/ComfyUI/custom_nodes && \
-#     git clone https://github.com/Gourieff/ComfyUI-ReActor.git comfyui-reactor && \
-#     cd comfyui-reactor && \
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone https://github.com/Gourieff/ComfyUI-ReActor.git comfyui-reactor && \
+    cd comfyui-reactor && \
+    python3 install.py
+
+# Install ComfyUI-segment-anything-2
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone https://github.com/kijai/ComfyUI-segment-anything-2.git comfyui-segment-anything-2 && \
+    cd comfyui-segment-anything-2 && \
+    pip3 install .
+
+# Install ComfyUI-SUPIR
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone  https://github.com/kijai/ComfyUI-SUPIR.git comfyui-supir && \
+    cd comfyui-supir && \
+    pip3 install -r requirements.txt
+
+# Install Comfyroll Studio
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git comfyroll-studio
+
+# Install ComfyUI ModdedNodes
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone https://github.com/Derfuu/Derfuu_ComfyUI_ModdedNodes.git derfuu-comfyui-modded-nodes
 
 # Install ComfyUI-AWS-Cognito-Login
 RUN --mount=type=secret,id=GH_TOKEN \
     GITHUB_TOKEN=$(cat /run/secrets/GH_TOKEN) && \
     cd /app/ComfyUI/custom_nodes && \
-    git clone https://${GITHUB_TOKEN}:@github.com/LucaLabsInc/ComfyUI-AWS-Cognito-Login.git --branch v1.0.6 --single-branch comfyui-aws-cognito-login && \
+    git clone https://${GITHUB_TOKEN}:@github.com/LucaLabsInc/ComfyUI-AWS-Cognito-Login.git --branch v1.0.7 --single-branch comfyui-aws-cognito-login && \
     cd comfyui-aws-cognito-login && \
     pip3 install -r requirements.txt
     
