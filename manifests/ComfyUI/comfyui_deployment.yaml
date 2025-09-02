@@ -27,6 +27,15 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8848
+        env:
+        - name: OMP_NUM_THREADS
+          value: "8"
+        - name: TORCH_NUM_THREADS
+          value: "8"
+        - name: MKL_NUM_THREADS
+          value: "8"
+        - name: NUMBA_NUM_THREADS
+          value: "8"
         volumeMounts:
         - mountPath: /app/ComfyUI/models
           name: stable-diffusion-models
@@ -37,5 +46,9 @@ spec:
         resources:
           requests:
             nvidia.com/gpu: 1
+            cpu: "15000m"
+            memory: "120Gi"
           limits:
             nvidia.com/gpu: 1
+            cpu: "15000m"
+            memory: "120Gi"
