@@ -21,6 +21,9 @@ spec:
       - name: comfyui-outputs
         persistentVolumeClaim:
           claimName: comfyui-outputs-pvc # Need to apply sd-outputs-s3.yaml first
+      - name: comfyui-workflows
+        persistentVolumeClaim:
+          claimName: comfyui-workflows-pvc # Need to apply sd-workflows-s3.yaml first
       containers:
       - name: comfyui
         image: 598982683772.dkr.ecr.us-west-2.amazonaws.com/comfyui-images:latest
@@ -43,6 +46,8 @@ spec:
           name: comfyui-inputs
         - mountPath: /app/ComfyUI/output
           name: comfyui-outputs
+        - mountPath: /app/ComfyUI/user/default/workflows
+          name: comfyui-workflows
         resources:
           requests:
             nvidia.com/gpu: 1

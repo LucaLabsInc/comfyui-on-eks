@@ -24,5 +24,13 @@ export class S3Storage extends cdk.Stack {
         autoDeleteObjects: true,
         removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
+
+    // Create S3 bucket for workflows
+    const workflows_bucketName = `comfyui-workflows-${project_name}`.replace(/-$/,'') + '-' + this.account + '-' + this.region;
+    const workflows_bucket = new s3.Bucket(this, workflows_bucketName, {
+        bucketName: workflows_bucketName,
+        autoDeleteObjects: true,
+        removalPolicy: cdk.RemovalPolicy.DESTROY,
+    });
   }
 }
