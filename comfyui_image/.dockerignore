@@ -1,0 +1,42 @@
+# Ignore git files
+.git
+.gitignore
+
+# Ignore any local development files
+*.pyc
+__pycache__
+.pytest_cache
+.coverage
+*.egg-info/
+
+# Ignore IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore any build artifacts
+build/
+dist/
+
+# Ignore any logs
+*.log
+
+# Ignore documentation
+*.md
+!README.md
+
+# Ignore test files
+test/
+tests/
+*_test.py
+test_*.py
+
+# Keep the github_token.txt file
+!github_token.txt
+
+
