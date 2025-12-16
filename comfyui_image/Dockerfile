@@ -116,6 +116,12 @@ RUN cd /app/ComfyUI/custom_nodes && \
     cd /app/ComfyUI/custom_nodes && \
     git clone https://github.com/quasiblob/ComfyUI-EsesImageResize.git eses-image-resize
 
+
+RUN cd /app/ComfyUI/custom_nodes && \
+    git clone https://github.com/Runware/ComfyUI-Runware.git comfyui-runware && \
+    cd comfyui-runware && \
+    pip3 install -r requirements.txt --break-system-packages
+
 # Stage 5: Private repository and configuration (changes most frequently)
 FROM custom-nodes-heavy AS final
 
